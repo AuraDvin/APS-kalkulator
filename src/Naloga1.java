@@ -1,5 +1,12 @@
 import java.util.Scanner;
 
+/**
+ * Todo: Test 4 (Comparrisons)
+ * Todo: Test 5 (Arithmetics)
+ * Todo: Test 7 (Then, Else, ?... commands)
+ * Todo: Test 9 (Run)
+ */
+
 @SuppressWarnings("ALL")
 public class Naloga1 {
     static Sequence<Stack<String>> skladi;
@@ -7,7 +14,7 @@ public class Naloga1 {
     static final int stackCount = 42;
     static boolean pogoj = false;
 
-    static void init() throws CollectionException{
+    static void init() throws CollectionException {
         skladi = new ArrayDeque<>();
         for (int i = 0; i < stackCount; i++) {
             skladi.add(new ArrayDeque<>());
@@ -45,7 +52,7 @@ public class Naloga1 {
                     i += num; // preskoči naprej
                     continue;
                 }
-                if (!handleUkaz(s, i, line)){
+                if (!handleUkaz(s, i, line)) {
                     skladi.get(selected).push(s);
                 }
             }
@@ -152,8 +159,8 @@ public class Naloga1 {
         }
     }
 
-    static void clear(int sklad) throws CollectionException{
-        while (!skladi.get(sklad).isEmpty()){
+    static void clear(int sklad) throws CollectionException {
+        while (!skladi.get(sklad).isEmpty()) {
             skladi.get(sklad).pop();
         }
     }
@@ -288,7 +295,7 @@ public class Naloga1 {
     static void aritmetika(int n) throws CollectionException {
         String niz1 = skladi.get(mainStack).pop();
         String niz2 = skladi.get(mainStack).pop();
-        if (n == 5){
+        if (n == 5) {
             String a = niz2 + niz1;
             skladi.get(mainStack).push(a);
             return;
@@ -390,13 +397,13 @@ class ArrayDeque<T> implements Stack<T>, Sequence<T> {
 
     @Override
     public T pop() throws CollectionException {
-        T x = top(); // throws exception
-        polje[front] = null; // preprečujemo postopanje
-        if (front == back) { // Last element -> will be empty next
+        T x = top();
+        polje[front] = null;
+        if (front == back) {
             front = back = -1;
         } else {
             front--;
-            if (front < 0) front += DEFAULT_CAPACITY; // To the end of the list
+            if (front < 0) front += DEFAULT_CAPACITY;
         }
         return x;
     }
@@ -410,7 +417,7 @@ class ArrayDeque<T> implements Stack<T>, Sequence<T> {
     @Override
     public T get(int i) throws CollectionException {
         if (isEmpty()) throw new CollectionException(Collection.ERR_MSG_EMPTY);
-        final int realIndex = (i + back) % DEFAULT_CAPACITY; // polje[back] -> 0. element
+        final int realIndex = (i + back) % DEFAULT_CAPACITY;
         if (i < 0 || realIndex > front) throw new CollectionException(Collection.ERR_MSG_INDEX);
         return polje[realIndex];
     }
@@ -433,6 +440,7 @@ interface Collection {
     String ERR_MSG_FULL = "Collection is full.";
     String ERR_MSG_INDEX = "Index is out of range";
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean isEmpty();
 
     boolean isFull();
