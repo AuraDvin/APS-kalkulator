@@ -2,19 +2,28 @@ import java.util.Scanner;
 
 @SuppressWarnings("ALL")
 public class Naloga1 {
-    static final Sequence<Stack<String>> skladi = new ArrayDeque<>();
+    static Sequence<Stack<String>> skladi;
     static final int mainStack = 0;
     static final int stackCount = 42;
     static boolean pogoj = false;
 
-    public static void main(String[] args) throws Exception {
+    static void init() throws CollectionException{
+        skladi = new ArrayDeque<>();
         for (int i = 0; i < stackCount; i++) {
             skladi.add(new ArrayDeque<>());
         }
+    }
 
+    public static void main(String[] args) throws Exception {
+        String niz;
         Scanner sc = new Scanner(System.in);
-        final String[] line = sc.nextLine().split(" ");
-        runLine(line);
+        do {
+            init();
+            if (!sc.hasNextLine()) break;
+            niz = sc.nextLine();
+            final String[] line = niz.split("\\s+");
+            runLine(line);
+        } while (sc.hasNextLine());
     }
 
     static void runLine(String[] line) throws CollectionException {
@@ -36,106 +45,117 @@ public class Naloga1 {
                     i += num; // preskoči naprej
                     continue;
                 }
-                handleUkaz(s, i, line);
+                if (!handleUkaz(s, i, line)){
+                    skladi.get(selected).push(s);
+                }
             }
         }
     }
 
-    static void handleUkaz(String ukaz, int index, String[] line) throws CollectionException {
+    static boolean handleUkaz(String ukaz, int index, String[] line) throws CollectionException {
         switch (ukaz) {
             case "echo":
                 echo();
-                break;
+                return true;
             case "pop":
                 pop();
-                break;
+                return true;
             case "dup":
                 dup();
-                break;
+                return true;
             case "dup2":
                 dup2();
-                break;
+                return true;
             case "swap":
                 swap();
-                break;
+                return true;
             case "char":
                 _char();
-                break;
+                return true;
             case "even":
                 evenodd(true);
-                break;
+                return true;
             case "odd":
                 evenodd(false);
-                break;
+                return true;
             case "!":
                 faktorial();
-                break;
+                return true;
             case "len":
                 len();
-                break;
+                return true;
             case "<>":
                 primerjaj(0);
-                break;
+                return true;
             case "==":
                 primerjaj(1);
-                break;
+                return true;
             case ">":
                 primerjaj(2);
-                break;
+                return true;
             case ">=":
                 primerjaj(3);
-                break;
+                return true;
             case "<":
                 primerjaj(4);
-                break;
+                return true;
             case "<=":
                 primerjaj(5);
-                break;
+                return true;
             case "+":
                 aritmetika(0);
-                break;
+                return true;
             case "-":
                 aritmetika(1);
-                break;
+                return true;
             case "*":
                 aritmetika(2);
-                break;
+                return true;
             case "/":
                 aritmetika(3);
-                break;
+                return true;
             case "%":
                 aritmetika(4);
-                break;
+                return true;
             case ".":
                 aritmetika(5);
-                break;
+                return true;
             case "rnd":
                 aritmetika(6);
-                break;
+                return true;
             case "then":
                 pogoj = !skladi.get(mainStack).pop().equals(Integer.toString(0));
-                break;
+                return true;
             case "else":
                 pogoj = !pogoj;
-                break;
+                return true;
             case "print":
                 print(selectSklad());
-                break;
+                return true;
             case "reverse":
                 reverse(selectSklad());
-                break;
+                return true;
             case "move":
                 move(selectSklad(), selectSklad());
-                break;
+                return true;
             case "loop":
                 loop(selectSklad(), selectSklad());
-                break;
+                return true;
             case "run":
                 run(selectSklad());
-                break;
-
+                return true;
+            case "clear":
+                clear(selectSklad());
+                return true;
+            default:
+                return false;
         }
+    }
 
+    static void clear(int sklad) throws CollectionException{
+        while (!skladi.get(sklad).isEmpty()){
+            skladi.get(sklad).pop();
+        }
     }
 
     static void run(int sklad) throws CollectionException {
