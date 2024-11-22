@@ -23,8 +23,8 @@ public class Naloga1 {
         String niz;
         Scanner sc = new Scanner(System.in);
         do {
-            init();
             if (!sc.hasNextLine()) break;
+            init();
             niz = sc.nextLine();
             final String[] line = niz.split("\\s+");
             runLine(line);
@@ -36,13 +36,15 @@ public class Naloga1 {
         for (int i = 0; i < line.length; i++) {
             String s = line[i];
             try {
-                int num = Integer.parseInt(s);
+                Integer.parseInt(s);
                 skladi.get(selected).push(s);
-            } catch (Exception e) { // Not a number
+            } catch (NumberFormatException e) {
+                // preverimo če je pogojni
                 if (s.charAt(0) == '?') {
                     s = s.substring(1);
                     if (!pogoj) continue;
                 }
+                // fun preskoči premaknjene ukaze
                 if (s.equals("fun")) {
                     int sklad = selectSklad();
                     int num = selectSklad();
@@ -50,6 +52,7 @@ public class Naloga1 {
                     i += num; // preskoči naprej
                     continue;
                 }
+                // ostali ukazi se izvršijo, razen če so le besede/znaki
                 if (!handleUkaz(s, i, line)) {
                     skladi.get(selected).push(s);
                 }
@@ -122,11 +125,11 @@ public class Naloga1 {
             case "%":
                 aritmetika(4);
                 return true;
-            case ".":
+            case "rnd":
                 aritmetika(5);
                 return true;
-            case "rnd":
-                aritmetika(6);
+            case ".":
+                concat();
                 return true;
             case "then":
                 pogoj = !skladi.get(mainStack).pop().equals(Integer.toString(0));
@@ -290,15 +293,8 @@ public class Naloga1 {
     }
 
     static void aritmetika(int n) throws CollectionException {
-        String niz1 = skladi.get(mainStack).pop();
-        String niz2 = skladi.get(mainStack).pop();
-        if (n == 5) {
-            String a = niz2 + niz1;
-            skladi.get(mainStack).push(a);
-            return;
-        }
-        final int num1 = Integer.parseInt(niz1);
-        final int num2 = Integer.parseInt(niz2);
+        final int num1 = Integer.parseInt(skladi.get(mainStack).pop());
+        final int num2 = Integer.parseInt(skladi.get(mainStack).pop());
         String niz = "";
         switch (n) {
             case 0:
@@ -317,9 +313,6 @@ public class Naloga1 {
                 niz = Integer.toString(num2 % num1);
                 break;
             case 5:
-                niz = num2 + Integer.toString(num1);
-                break;
-            case 6:
                 int min = Math.min(num1, num2);
                 int max = Math.max(num1, num2);
                 int rand = min + (int) (Math.random() * (max - min + 1));
@@ -327,6 +320,13 @@ public class Naloga1 {
                 break;
         }
         skladi.get(mainStack).push(niz);
+    }
+
+    static void concat() throws CollectionException {
+        String niz1 = skladi.get(mainStack).pop();
+        String niz2 = skladi.get(mainStack).pop();
+        String a = niz2 + niz1;
+        skladi.get(mainStack).push(a);
     }
 
     static void print(int sklad) throws CollectionException {
