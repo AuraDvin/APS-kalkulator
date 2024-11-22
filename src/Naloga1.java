@@ -14,8 +14,6 @@ public class Naloga1 {
 
         Scanner sc = new Scanner(System.in);
         final String[] line = sc.nextLine().split(" ");
-//        final String[] line = new String[args.length];
-//        System.arraycopy(args, 0, line, 0, args.length); // za testiranje
         runLine(line);
     }
 
@@ -40,9 +38,7 @@ public class Naloga1 {
                 }
                 handleUkaz(s, i, line);
             }
-
         }
-
     }
 
     static void handleUkaz(String ukaz, int index, String[] line) throws CollectionException {
@@ -117,7 +113,7 @@ public class Naloga1 {
                 aritmetika(6);
                 break;
             case "then":
-                pogoj = !skladi.get(mainStack).top().equals("" + 0);
+                pogoj = !skladi.get(mainStack).pop().equals(Integer.toString(0));
                 break;
             case "else":
                 pogoj = !pogoj;
