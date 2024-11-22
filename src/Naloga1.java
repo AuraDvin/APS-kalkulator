@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 /**
- * Todo: Test 5 (Arithmetics)
  * Todo: Test 7 (Then, Else, ?... commands)
  * Todo: Test 9 (Run)
  */
@@ -321,7 +320,10 @@ public class Naloga1 {
                 niz = num2 + Integer.toString(num1);
                 break;
             case 6:
-                niz = Integer.toString((int) (Math.random() * (num1 + num2 - 1) + num2));
+                int min = Math.min(num1, num2);
+                int max = Math.max(num1, num2);
+                int rand = min + (int) (Math.random() * (max - min + 1));
+                niz = "" + rand;
                 break;
         }
         skladi.get(mainStack).push(niz);
