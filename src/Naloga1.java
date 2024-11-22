@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 /**
- * Todo: Test 4 (Comparrisons)
  * Todo: Test 5 (Arithmetics)
  * Todo: Test 7 (Then, Else, ?... commands)
  * Todo: Test 9 (Run)
@@ -200,7 +199,6 @@ public class Naloga1 {
         }
     }
 
-
     static int selectSklad() throws CollectionException {
         return Integer.parseInt(skladi.get(mainStack).pop());
     }
@@ -245,9 +243,9 @@ public class Naloga1 {
     static void evenodd(boolean even) throws CollectionException {
         final int num = Integer.parseInt(skladi.get(mainStack).pop());
         if (even)
-            skladi.get(mainStack).push(num % 2 == 1 ? "0" : "1");
+            skladi.get(mainStack).push(Math.abs(num % 2) == 1 ? "0" : "1");
         else {
-            skladi.get(mainStack).push(num % 2 + "");
+            skladi.get(mainStack).push(Math.abs(num % 2) + "");
         }
     }
 
