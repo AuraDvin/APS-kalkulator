@@ -11,12 +11,16 @@ public class Naloga1 {
         for (int i = 0; i < stackCount; i++) {
             skladi.add(new ArrayDeque<>());
         }
-        int selected = 0;
+
         Scanner sc = new Scanner(System.in);
         final String[] line = sc.nextLine().split(" ");
 //        final String[] line = new String[args.length];
 //        System.arraycopy(args, 0, line, 0, args.length); // za testiranje
+        runLine(line);
+    }
 
+    static void runLine(String[] line) throws CollectionException {
+        int selected = 0;
         for (int i = 0; i < line.length; i++) {
             String s = line[i];
             try {
@@ -30,7 +34,7 @@ public class Naloga1 {
                 if (s.equals("fun")) {
                     int sklad = selectSklad();
                     int num = selectSklad();
-                    fun(sklad, i + 1, num,line);
+                    fun(sklad, i + 1, num, line);
                     i += num; // preskoči naprej
                     continue;
                 }
@@ -130,21 +134,24 @@ public class Naloga1 {
             case "loop":
                 loop(selectSklad(), selectSklad());
                 break;
+            case "run":
+                run(selectSklad());
+                break;
 
         }
 
+    }
+
+    static void run(int sklad) throws CollectionException {
+        String[] line = skladi.get(sklad).toString().split(" ");
+        runLine(line);
     }
 
     static void loop(int sklad, int kolikokrat) throws CollectionException {
         // ivedi sklad ena kolikokrat
         for (int i = 0; i < kolikokrat; i++) {
             // izvedi sklad
-            String[] line = skladi.get(sklad).toString().split(" ");
-            line[line.length - 1] = line[line.length - 1].replace('\n', (char) 0);
-            for (int j = 0; j < line.length; j++) {
-                String ukaz = line[j];
-                handleUkaz(ukaz, j, line);
-            }
+            run(sklad);
         }
     }
 
