@@ -286,8 +286,15 @@ public class Naloga1 {
     }
 
     static void aritmetika(int n) throws CollectionException {
-        final int num1 = Integer.parseInt(skladi.get(mainStack).pop());
-        final int num2 = Integer.parseInt(skladi.get(mainStack).pop());
+        String niz1 = skladi.get(mainStack).pop();
+        String niz2 = skladi.get(mainStack).pop();
+        if (n == 5){
+            String a = niz2 + niz1;
+            skladi.get(mainStack).push(a);
+            return;
+        }
+        final int num1 = Integer.parseInt(niz1);
+        final int num2 = Integer.parseInt(niz2);
         String niz = "";
         switch (n) {
             case 0:
