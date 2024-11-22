@@ -12,10 +12,10 @@ public class Naloga1 {
             skladi.add(new ArrayDeque<>());
         }
         int selected = 0;
-//        Scanner sc = new Scanner(System.in);
-//        final String[] line = sc.nextLine().split(" ");
-        final String[] line = new String[args.length];
-        System.arraycopy(args, 0, line, 0, args.length); // za testiranje
+        Scanner sc = new Scanner(System.in);
+        final String[] line = sc.nextLine().split(" ");
+//        final String[] line = new String[args.length];
+//        System.arraycopy(args, 0, line, 0, args.length); // za testiranje
 
         for (int i = 0; i < line.length; i++) {
             String s = line[i];
@@ -26,6 +26,13 @@ public class Naloga1 {
                 if (s.charAt(0) == '?') {
                     s = s.substring(1);
                     if (!pogoj) continue;
+                }
+                if (s.equals("fun")) {
+                    int sklad = selectSklad();
+                    int num = selectSklad();
+                    fun(sklad, i + 1, num,line);
+                    i += num; // preskoči naprej
+                    continue;
                 }
                 handleUkaz(s, i, line);
             }
@@ -117,14 +124,28 @@ public class Naloga1 {
             case "reverse":
                 reverse(selectSklad());
                 break;
-            case "fun":
-                fun(selectSklad(), index + 1, selectSklad(), line);
-                break;
             case "move":
                 move(selectSklad(), selectSklad());
                 break;
+            case "loop":
+                loop(selectSklad(), selectSklad());
+                break;
+
         }
 
+    }
+
+    static void loop(int sklad, int kolikokrat) throws CollectionException {
+        // ivedi sklad ena kolikokrat
+        for (int i = 0; i < kolikokrat; i++) {
+            // izvedi sklad
+            String[] line = skladi.get(sklad).toString().split(" ");
+            line[line.length - 1] = line[line.length - 1].replace('\n', (char) 0);
+            for (int j = 0; j < line.length; j++) {
+                String ukaz = line[j];
+                handleUkaz(ukaz, j, line);
+            }
+        }
     }
 
     static void move(int sklad, int num) throws CollectionException {
@@ -329,7 +350,7 @@ class ArrayDeque<T> implements Stack<T>, Sequence<T> {
         polje[++front] = x;
     }
 
-    public T shift() throws CollectionException{
+    public T shift() throws CollectionException {
         T x = back();
         polje[back] = null;
         ++back;
