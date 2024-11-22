@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 /**
- * Todo: Test 7 (Then, Else, ?... commands)
  * Todo: Test 9 (Run)
  */
 
@@ -10,10 +9,11 @@ public class Naloga1 {
     static Sequence<Stack<String>> skladi;
     static final int mainStack = 0;
     static final int stackCount = 42;
-    static boolean pogoj = false;
+    static boolean pogoj;
 
     static void init() throws CollectionException {
         skladi = new ArrayDeque<>();
+        pogoj = false;
         for (int i = 0; i < stackCount; i++) {
             skladi.add(new ArrayDeque<>());
         }
