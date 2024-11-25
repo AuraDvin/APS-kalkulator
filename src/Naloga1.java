@@ -387,14 +387,6 @@ class ArrayDeque<T> implements Stack<T>, Sequence<T> {
         polje[++front] = x;
     }
 
-    public T shift() throws CollectionException {
-        T x = back();
-        polje[back] = null;
-        ++back;
-        back %= DEFAULT_CAPACITY;
-        return x;
-    }
-
     @Override
     public T pop() throws CollectionException {
         T x = top();
