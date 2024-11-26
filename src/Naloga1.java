@@ -167,7 +167,7 @@ public class Naloga1 {
     }
 
     static void run(int sklad) throws CollectionException {
-        String[] line = skladi.get(sklad).toString().split(" ");
+        String[] line = skladi.get(sklad).toString().split("\\s+");
         runLine(line);
     }
 
