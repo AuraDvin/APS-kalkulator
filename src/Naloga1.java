@@ -1,9 +1,5 @@
 import java.util.Scanner;
 
-/**
- * Todo: Test 9 (Run)
- */
-
 @SuppressWarnings("ALL")
 public class Naloga1 {
     static Sequence<Stack<String>> skladi;
@@ -39,6 +35,10 @@ public class Naloga1 {
                 Integer.parseInt(s);
                 skladi.get(selected).push(s);
             } catch (NumberFormatException e) {
+                // Preverimo da je veljavne dolžine
+                if (s.length() == 0) {
+                    continue;
+                }
                 // preverimo če je pogojni
                 if (s.charAt(0) == '?') {
                     s = s.substring(1);
