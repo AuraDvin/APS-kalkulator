@@ -3,7 +3,7 @@ Uses the Reverse polish notation and calculates the result of input in arguments
 
 # Building and running
 Build the class `Naloga1.java` with javac, then run with program `java Naloga1` and with every line write a program that you want it to execute.
-Made with the original exercise requirements (in Slovene): 
+Made with the original exercise requirements, note the formatting was not perfect (in Slovene): <br>
 Kalkulator naj podpira naslednje ukaze oz. operacije (nad glavnim skladom):
 
     echo - v vrstici izpiše vrh sklada 0 (sklad pusti nespremenjen); če je sklad prazen, izpiše prazno vrstico
@@ -57,50 +57,45 @@ Za delo s poljubnim skladom (glavnim ali pomožnimi) imamo na voljo spodnje ukaz
 
 # Examples
 The > means the following line is the input of the program.
- > 0 -1 3 5 -7 11 -13 17 dup2 echo pop echo swap 0 print
-17
--13
-
+ \> 0 -1 3 5 -7 11 -13 17 dup2 echo pop echo swap 0 print 17 -13 <br> 
 0 -1 3 5 -7 11 -13 -13 17 
 
-> 151 131 + echo -100 140 - echo + echo
+\> 151 131 + echo -100 140 - echo + echo <br>
+
 282
 -240
 42
 
-> 3 5 11 17 0 print + + 10 * 0 print * 11 / echo
+\> 3 5 11 17 0 print + + 10 * 0 print * 11 / echo <br>
 
 3 5 11 17
-
 3 330
 90
 
-> 6 ! echo 42 == echo even 0 print
+\> 6 ! echo 42 == echo even 0 print <br>
 720
 0
 1
 
-> 65 90 rnd echo char echo
-66
+\> 65 90 rnd echo char echo <br>
+<br> 66
 B
 
-> 0 1 2 3 4 3 4 4 1 fun dup 0 reverse swap 2 2 move 0 print 1 print 2 print
-0 1 2 3 4
-dup 0 reverse swap
-4 3
+\> 0 1 2 3 4 3 4 4 1 fun dup 0 reverse swap 2 2 move 0 print 1 print 2 print 0 1 2 3 4 dup 0 reverse swap <br>
+<br> 4 3
 
-> 0 1 2 3 3 1 fun 0 reverse dup 0 print 1 run 0 print 2 1 loop 0 print
-0 1 2 3 
+\> 0 1 2 3 3 1 fun 0 reverse dup 0 print 1 run 0 print 2 1 loop 0 print <br>
+<br> 0 1 2 3 
 3 2 1 0 0  
 33 2 1 0 0 0
 
-> 7 3 1 2 5 1 fun == then ?dup2 else ?+ 1 run 0 print
-10
+\> 7 3 1 2 5 1 fun == then ?dup2 else ?+ 1 run 0 print
+<br>10
 
-> 9 1 fun dup 0 reverse swap % dup then ?1 ?run 24 10 0 print 1 run pop echo
-24 10
+\> 9 1 fun dup 0 reverse swap % dup then ?1 ?run 24 10 0 print 1 run pop echo
+<br>24 10
 2
 
-> 3 1 fun 0 100 rnd 3 2 fun 5 1 loop 7 3 fun dup2 <= then ?pop else ?swap ?pop 3 4 fun 4 3 loop 1 print 2 print 3 print 4 print 2 run 0 print 4 run 0 print 0 100 rnd 1 5 loop dup2 <= then ?pop else ?swap ?pop 4 3 loop 
-34 96 12 48 24
+\> 3 1 fun 0 100 rnd 3 2 fun 5 1 loop 7 3 fun dup2 <= then ?pop else ?swap ?pop 3 4 fun 4 3 loop 1 print 2 print 3 print 4 print 2 run 0 print 4 run 0 print 0 100 rnd 1 5 loop dup2 <= then ?pop else ?swap ?pop 4 3 loop 
+<br> 34 96 12 48 24
 12
